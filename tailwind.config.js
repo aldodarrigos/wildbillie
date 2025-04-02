@@ -14,6 +14,9 @@ module.exports = {
         secondary: "#111111",
         tertiary: "#222222",
       },
+      fontFamily: {
+        raleway: ['var(--font-raleway)', 'sans-serif'],
+      },
       backgroundImage:{
         'primary-gradient': 'linear-gradient(to bottom, #FF9B05, #FF5005)',
         'primary-gradient-hover': 'linear-gradient(to bottom, #FF5005, #FF9B05)',
