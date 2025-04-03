@@ -30,16 +30,33 @@ export default function NZMap() {
     // Create a group for the map
     const mapGroup = svg.append('g');
 
-    // Create a tooltip
+    // Create a tooltip with indicator line and circle
+    const tooltipGroup = svg
+      .append('g')
+      .attr('class', 'tooltip-group')
+      .style('opacity', 0);
+
+    // Add line from region to tooltip
+    const tooltipLine = tooltipGroup
+      .append('line')
+      .attr('class', 'tooltip-line')
+      .attr('stroke', '#FF9B05')
+      .attr('stroke-width', 2);
+
+    // Add circle at the end of the line
+    const tooltipCircle = tooltipGroup
+      .append('circle')
+      .attr('class', 'tooltip-circle')
+      .attr('r', 6)
+      .attr('fill', '#FF9B05');
+
+    // Text tooltip element
     const tooltip = d3
       .select('body')
       .append('div')
       .attr('class', 'tooltip')
       .style('opacity', 0)
       .style('position', 'absolute')
-      .style('background', 'white')
-      .style('padding', '10px')
-      .style('border-radius', '5px')
       .style('pointer-events', 'none');
 
     // Load the GeoJSON data
@@ -67,22 +84,35 @@ export default function NZMap() {
           .attr('stroke', '#fff')
           .attr('stroke-width', 2)
           .on('mouseover', function (event, d: any) {
+            const [x, y] = path.centroid(d as any);
+
+            // Position tooltip elements
+            tooltipGroup.style('opacity', 1);
+            tooltipCircle.attr('cx', x - 200).attr('cy', y);
+            tooltipLine
+              .attr('x1', x - 18)
+              .attr('y1', y)
+              .attr('x2', x - 200)
+              .attr('y2', y);
+
             d3.select(this)
-              .attr('fill', '#27ae60')
-              .attr('stroke', '#000')
+              .attr('fill', '#FF9B05')
+              .attr('stroke', '#FFF')
               .attr('stroke-width', 1);
 
             tooltip
-              .style('opacity', 0.9)
-              .html(`<strong>Región:</strong> ${d.properties.name}`)
-              .style('left', event.pageX + 10 + 'px')
-              .style('top', event.pageY - 28 + 'px');
+              .style('opacity', 1)
+              .html(`${d.properties.name}`)
+              .style('left', x + 470 + 'px')
+              .style('top', y + 35+ 'px');
           })
           .on('mouseout', function () {
+            tooltipGroup.style('opacity', 0);
+
             d3.select(this)
-              .attr('fill', '#2ecc71')
+              .attr('fill', 'transparent')
               .attr('stroke', '#fff')
-              .attr('stroke-width', 0.5);
+              .attr('stroke-width', 2);
 
             tooltip.style('opacity', 0);
           });

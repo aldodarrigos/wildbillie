@@ -14,7 +14,7 @@ export default function BannerHome() {
     <div
       id="banner-container"
       style={styles.bannerContainer}
-      className="w-full h-screen mt-24"
+      className="w-full h-screen mt-16"
     >
       <img
         src="/img/bg-banner-home.webp"
@@ -70,7 +70,7 @@ export default function BannerHome() {
             />
           </div>
         </div>
-        <div id="banner-map">
+        <div id="banner-map" className="-mt-14">
           <NZMap />
         </div>
       </div>
@@ -83,7 +83,6 @@ const categories = [
   'Fun runs',
   '10k runs',
   'South Island runs',
-  'North Island runs',
 ];
 
 const styles = {

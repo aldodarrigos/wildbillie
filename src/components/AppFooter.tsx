@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import Image from 'next/image';
 export default function AppFooter() {
   return (
     <footer className="w-full bg-gradient-to-r from-[#FF9B05] to-[#FF5005] text-white py-16 max-screen-xl">
@@ -7,23 +7,15 @@ export default function AppFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1 - Main Info */}
           <div className="col-span-1">
-            <h2 className="font-bold text-4xl mb-4 font-raleway">
-              Wild Billie
-            </h2>
-            <p className="text-sm mb-6">
+            <Image
+              src="/img/logo-white.webp"
+              alt="Wild Billie"
+              width={100}
+              height={100}
+            />
+            <p className="text-sm mb-6 mt-5">
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit
             </p>
-            <div className="flex gap-4">
-              <Link href="#" className="hover:opacity-80">
-                Loremipsum
-              </Link>
-              <Link href="#" className="hover:opacity-80">
-                Loremipsum
-              </Link>
-              <Link href="#" className="hover:opacity-80">
-                Loremipsum
-              </Link>
-            </div>
           </div>
 
           {/* Column 2 - Links */}
