@@ -15,7 +15,7 @@ import Image from 'next/image';
 import { INavBar } from '@/types/ui';
 import AppButton from '../AppButton';
 import AppButtonGroup from '../AppButtonGroup';
-import { Button } from '@heroui/button';
+import { SearchIcon, SearchLightIcon } from '@/icons';
 
 const defaultMenuItems = [
   { name: 'Events', href: '#', isActive: true },
@@ -56,10 +56,6 @@ export default function Navbar({ menuItems = defaultMenuItems }: INavBar) {
       }}
     >
       <NavbarContent className="gap-4">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className={`sm:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
-        />
         <NavbarBrand>
           <Link href="/">
             <Image
@@ -99,8 +95,16 @@ export default function Navbar({ menuItems = defaultMenuItems }: INavBar) {
         ))}
       </NavbarContent>
 
-      <NavbarContent justify="end" className="gap-4">
-        <AppButtonGroup radius="sm" className="shadow-lg">
+      <NavbarContent justify="end" className="gap-4 lg:gap-14">
+        <Link href="#">
+            <SearchLightIcon color={scrolled ? '#000' : '#fff'} />
+        </Link>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className={`sm:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
+        />
+
+        <AppButtonGroup radius="sm" className="shadow-lg hidden lg:flex">
           <AppButton color="primary">Sign Up</AppButton>
           <AppButton color="primary">Log In</AppButton>
         </AppButtonGroup>
