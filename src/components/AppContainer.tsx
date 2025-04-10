@@ -5,9 +5,10 @@ interface ContainerProps {
   className?: string;
 }
 
-export default function AppContainer({
+export default function   AppContainer({
   children,
-  variant = 'fluid',
+  variant = 'xl',
+  className
 }: ContainerProps) {
-  return <Container variant={variant}>{children}</Container>;
+  return <Container variant={variant} className={className}>{children}</Container>;
 }

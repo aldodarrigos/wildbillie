@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { Feature, GeoJSON } from 'geojson';
+import { useRouter } from 'next/navigation';
 
 interface GeoJSONData {
   features: Feature[];
@@ -10,6 +11,7 @@ interface GeoJSONData {
 
 export default function NZMap() {
   const mapRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -104,7 +106,7 @@ export default function NZMap() {
               .style('opacity', 1)
               .html(`${d.properties.name}`)
               .style('left', x + 470 + 'px')
-              .style('top', y + 35+ 'px');
+              .style('top', y + 35 + 'px');
           })
           .on('mouseout', function () {
             tooltipGroup.style('opacity', 0);
@@ -115,7 +117,12 @@ export default function NZMap() {
               .attr('stroke-width', 2);
 
             tooltip.style('opacity', 0);
-          });
+          })
+          .on('click', function (event, d: any) {
+            // Navegar a la página dinámica de la región
+            router.push(`/regions/${d.properties.name}`);
+          })
+          .style('cursor', 'pointer'); // Cambiar el cursor para indicar que es clickeable
 
         // Add zoom and pan
         // const zoom = d3
@@ -143,7 +150,7 @@ export default function NZMap() {
     return () => {
       tooltip.remove();
     };
-  }, []);
+  }, [router]);
 
   return <div ref={mapRef} className="w-full h-[600px]" />;
 }

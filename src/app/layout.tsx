@@ -35,6 +35,7 @@ export default function RootLayout({
 }>) {
   const menuItems: INavBarItem[] = [
     { name: 'Running', href: '/', isActive: true, isMenu: true },
+    { name: 'Regions', href: '/regions', isMenu: true },
     { name: 'Triathlon', href: '/about', isMenu: true },
     { name: 'Marathon', href: '/contact', isMenu: true },
   ];
@@ -45,9 +46,7 @@ export default function RootLayout({
     >
       <body className="font-raleway">
           <AppNavbar menuItems={menuItems} />
-          <AppContainer variant="xl">
             {children}
-          </AppContainer>
           <AppFooter />
       </body>
     </html>

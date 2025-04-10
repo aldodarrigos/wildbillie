@@ -11,7 +11,7 @@ const variantClasses = {
   md: 'max-w-screen-md',
   lg: 'max-w-screen-lg',
   xl: 'max-w-screen-xl',
-  fluid: 'max-w-full'
+  fluid: 'max-w-full w-full'
 };
 
 export default function Container({ 
@@ -22,8 +22,10 @@ export default function Container({
   return (
     <div
       className={cn(
+       
         'container mx-auto px-4 sm:px-6 lg:px-8',
-        className
+        className,
+        variantClasses[variant]
       )}
     >
       {children}
